@@ -1,6 +1,6 @@
 package bits;
 
-public class Atoi {
+public class Atoi2 {
   
   // private static String s = "987 362";
   // private static String s = "+3269";
