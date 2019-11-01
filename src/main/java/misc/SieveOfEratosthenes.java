@@ -3,7 +3,7 @@ package misc;
 import java.util.HashMap;
 import java.util.Map;
 
-// Find all prime numbers less than equal to n
+// Find all prime numbers less than or equal to n
 public class SieveOfEratosthenes {
   
   public static void main(String[] args) {
