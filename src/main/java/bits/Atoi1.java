@@ -1,6 +1,7 @@
 package bits;
 
 public class Atoi1 {
+    
   // private static String s = "-25";
   // private static String s = "25 456";
   private static String s = "25";
