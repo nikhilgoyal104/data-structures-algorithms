@@ -11,6 +11,10 @@ class Node {
 }
 
 
+/**
+ * 1. insertAtEnd 2. insertAtBeginning 3. insertAt 4. display 5. reverseRecursivelyUsingOnePointer
+ * 6. reverseRecursively 7. reverseIteratively 8. delete 9. deleteAt 10. search 11. getSize
+ */
 class LinkedList {
   
   Node head;
@@ -31,6 +35,35 @@ class LinkedList {
       }
       temp.next = node;
     }
+  }
+  
+  /**
+   * Inserts node at the beginning of linked list
+   * 
+   * @param data to be inserted
+   */
+  void insertAtBeginning(int data) {
+    Node node = new Node(data);
+    node.next = head;
+    head = node;
+  }
+  
+  boolean insertAt(int index, int data) {
+    if (index < 0 || index > getSize()) {
+      return false;
+    }
+    Node node = new Node(data);
+    Node temp = head;
+    if (index == 0) {
+      insertAtBeginning(data);
+    } else {
+      for (int i = 0; i < index - 1; i++) {
+        temp = temp.next;
+      }
+      node.next = temp.next;
+      temp.next = node;
+    }
+    return true;
   }
   
   /**
@@ -123,6 +156,86 @@ class LinkedList {
     head = p1;
     return head;
   }
+  
+  /**
+   * Deletes a node with given value
+   * 
+   * @param value to be deleted
+   * @return true if the value is deleted
+   */
+  boolean delete(int value) {
+    // delete head node
+    if (head.data == value) {
+      head = head.next;
+      return true;
+    }
+    
+    Node temp = head;
+    Node previous = head;
+    while (temp != null) {
+      if (temp.data == value) {
+        previous.next = temp.next;
+        return true;
+      }
+      previous = temp;
+      temp = temp.next;
+    }
+    return false;
+  }
+  
+  boolean deleteAt(int index) {
+    if (index < 0 || index > getSize() - 1) {
+      return false;
+    }
+    // delete head element
+    if (index == 0) {
+      head = head.next;
+    } else {
+      Node temp = head;
+      Node previous = head;
+      for (int i = 0; i < index; i++) {
+        previous = temp;
+        temp = temp.next;
+      }
+      previous.next = temp.next;
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * Searches for the value in the linked list
+   * 
+   * @param value to be searched
+   * @return index of the value if it is present else -1
+   */
+  int search(int value) {
+    Node temp = head;
+    int index = 0;
+    while (temp != null) {
+      if (temp.data == value) {
+        return index;
+      }
+      temp = temp.next;
+      index++;
+    }
+    return -1;
+  }
+  
+  /**
+   * Calculates the size of the linked list
+   * 
+   * @return size of the linked list
+   */
+  private int getSize() {
+    int size = 0;
+    Node temp = head;
+    while (temp != null) {
+      size++;
+      temp = temp.next;
+    }
+    return size;
+  }
 }
 
 
@@ -141,6 +254,27 @@ public class LinkedListOperations {
     linkedList.head = linkedList.reverseRecursively();
     linkedList.display(linkedList.head);
     linkedList.head = linkedList.reverseIteratively();
+    linkedList.display(linkedList.head);
+    System.out.println(linkedList.search(3));
+    System.out.println(linkedList.search(5));
+    System.out.println(linkedList.delete(3));
+    // delete head node
+    System.out.println(linkedList.delete(5));
+    linkedList.display(linkedList.head);
+    // delete last node
+    System.out.println(linkedList.delete(1));
+    linkedList.display(linkedList.head);
+    linkedList.insertAtBeginning(5);
+    linkedList.insertAtBeginning(6);
+    linkedList.display(linkedList.head);
+    System.out.println(linkedList.deleteAt(1));
+    System.out.println(linkedList.deleteAt(3));
+    linkedList.display(linkedList.head);
+    System.out.println(linkedList.insertAt(1, 5));
+    linkedList.display(linkedList.head);
+    System.out.println(linkedList.insertAt(3, 3));
+    linkedList.display(linkedList.head);
+    System.out.println(linkedList.insertAt(5, 1));
     linkedList.display(linkedList.head);
   }
 }
