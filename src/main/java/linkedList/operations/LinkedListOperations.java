@@ -242,39 +242,41 @@ class LinkedList {
 public class LinkedListOperations {
   
   public static void main(String[] args) {
-    LinkedList linkedList = new LinkedList();
-    linkedList.insertAtEnd(1);
-    linkedList.insertAtEnd(2);
-    linkedList.insertAtEnd(3);
-    linkedList.insertAtEnd(4);
-    linkedList.insertAtEnd(5);
-    linkedList.display(linkedList.head);
-    linkedList.head = linkedList.reverseRecursivelyUsingOnePointer(linkedList.head);
-    linkedList.display(linkedList.head);
-    linkedList.head = linkedList.reverseRecursively();
-    linkedList.display(linkedList.head);
-    linkedList.head = linkedList.reverseIteratively();
-    linkedList.display(linkedList.head);
-    System.out.println(linkedList.search(3));
-    System.out.println(linkedList.search(5));
-    System.out.println(linkedList.delete(3));
-    // delete head node
-    System.out.println(linkedList.delete(5));
-    linkedList.display(linkedList.head);
-    // delete last node
-    System.out.println(linkedList.delete(1));
-    linkedList.display(linkedList.head);
-    linkedList.insertAtBeginning(5);
-    linkedList.insertAtBeginning(6);
-    linkedList.display(linkedList.head);
-    System.out.println(linkedList.deleteAt(1));
-    System.out.println(linkedList.deleteAt(3));
-    linkedList.display(linkedList.head);
-    System.out.println(linkedList.insertAt(1, 5));
-    linkedList.display(linkedList.head);
-    System.out.println(linkedList.insertAt(3, 3));
-    linkedList.display(linkedList.head);
-    System.out.println(linkedList.insertAt(5, 1));
-    linkedList.display(linkedList.head);
+    LinkedList list = new LinkedList();
+    list.insertAtEnd(1);
+    list.insertAtEnd(2);
+    list.insertAtEnd(3);
+    list.insertAtEnd(4);
+    list.insertAtEnd(5);
+    list.display(list.head);
+    list.head = list.reverseRecursivelyUsingOnePointer(list.head);
+    list.display(list.head);
+    list.head = list.reverseRecursively();
+    list.display(list.head);
+    list.head = list.reverseIteratively();
+    list.display(list.head);
+    print(list.search(3));
+    print(list.search(5));
+    print(list.delete(3));
+    print(list.delete(5));
+    list.display(list.head);
+    print(list.delete(1));
+    list.display(list.head);
+    list.insertAtBeginning(5);
+    list.insertAtBeginning(6);
+    list.display(list.head);
+    print(list.deleteAt(1));
+    print(list.deleteAt(3));
+    list.display(list.head);
+    print(list.insertAt(1, 5));
+    list.display(list.head);
+    print(list.insertAt(3, 3));
+    list.display(list.head);
+    print(list.insertAt(5, 1));
+    list.display(list.head);
+  }
+  
+  private static void print(Object o) {
+    System.out.println(o);
   }
 }
