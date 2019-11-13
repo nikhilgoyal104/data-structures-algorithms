@@ -88,17 +88,37 @@ class LinkedList {
    * @param node in the list
    * @return address of last node
    */
-  Node reverseRecursivelyUsingOnePointer(Node node) {
+  Node reverseRecursivelyUsingOnePointer1(Node node) {
+    // node == null handles empty list
     // this will return the address of last node
     if (node == null || node.next == null) {
       return node;
     }
     // head recursion
-    Node temp = reverseRecursivelyUsingOnePointer(node.next);
+    Node temp = reverseRecursivelyUsingOnePointer1(node.next);
     node.next.next = node;
     // break the current link
     node.next = null;
     return temp;
+  }
+  
+  /**
+   * Reverses the linked list using recursion and only one pointer
+   *
+   * @param node in the list
+   */
+  void reverseRecursivelyUsingOnePointer2(Node node) {
+    // node == null handles empty list
+    // this will assign head to the address of last node
+    if (node == null || node.next == null) {
+      head = node;
+      return;
+    }
+    // head recursion
+    reverseRecursivelyUsingOnePointer2(node.next);
+    node.next.next = node;
+    // break the current link
+    node.next = null;
   }
   
   /**
@@ -249,7 +269,8 @@ public class LinkedListOperations {
     list.insertAtEnd(4);
     list.insertAtEnd(5);
     list.display(list.head);
-    list.head = list.reverseRecursivelyUsingOnePointer(list.head);
+    // list.head = list.reverseRecursivelyUsingOnePointer1(list.head);
+    list.reverseRecursivelyUsingOnePointer2(list.head);
     list.display(list.head);
     list.head = list.reverseRecursively();
     list.display(list.head);
