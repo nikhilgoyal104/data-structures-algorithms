@@ -29,7 +29,7 @@ class Stack extends java.util.Stack<Object> {
   }
   
   Integer getMin() {
-    return peek().min;
+    return super.peek().min;
   }
 }
 
