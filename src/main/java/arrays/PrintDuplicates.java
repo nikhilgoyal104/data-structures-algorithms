@@ -1,4 +1,4 @@
-package arrays;
+package nikhil;
 
 import java.util.Arrays;
 
@@ -6,12 +6,12 @@ import java.util.Arrays;
 // appearing any number of times. Find these repeating numbers in O(n) and using only constant
 // memory space. For example, let n be 7 and array be {1, 2, 3, 1, 3, 6, 6}, the answer should be 1,
 // 3 and 6.
-public class PrintDuplicates {
+class Test {
   
   private static void printDuplicates(int[] input) {
     int n = input.length;
     // if x % y = r then 0 <= r <= y-1, therefore 0 < = index < = n-1
-    // if x % y =r then (x+y)%y = r, therefore we can add n to the element
+    // if x % y = r then ( x + y ) % y = r, therefore we can add n to the element
     for (int i = 0; i < n; i++) {
       input[input[i] % n] += n;
     }
