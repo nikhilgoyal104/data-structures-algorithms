@@ -2,8 +2,16 @@ package stacks;
 
 import java.util.Stack;
 
+/**
+ * Program to evaluate postfix expression
+ */
 public class PostfixEvaluation {
   
+  /**
+   * Evaluate postfix expression and print it
+   * 
+   * @param expression postfix string
+   */
   private static void evaluatePostfix(String expression) {
     Stack<Integer> stack = new Stack<>();
     for (int i = 0; i < expression.length(); i++) {
@@ -29,23 +37,32 @@ public class PostfixEvaluation {
       else {
         int operand2 = stack.pop();
         int operand1 = stack.pop();
-        switch (ch) {
-          case '*':
-            stack.push(operand1 * operand2);
-            break;
-          case '/':
-            stack.push(operand1 / operand2);
-            break;
-          case '+':
-            stack.push(operand1 + operand2);
-            break;
-          case '-':
-            stack.push(operand1 - operand2);
-            break;
-        }
+        stack.push(performOperation(ch, operand1, operand2));
       }
     }
     System.out.println("Result for expression " + expression + " = " + stack.pop());
+  }
+  
+  /**
+   * Performs the operation on two given operands
+   * 
+   * @param ch operator
+   * @param operand1
+   * @param operand2
+   * @return
+   */
+  private static int performOperation(char ch, int operand1, int operand2) {
+    switch (ch) {
+      case '*':
+        return operand1 * operand2;
+      case '/':
+        return operand1 / operand2;
+      case '+':
+        return operand1 + operand2;
+      case '-':
+        return operand1 - operand2;
+    }
+    return -1;
   }
   
   public static void main(String[] args) {
