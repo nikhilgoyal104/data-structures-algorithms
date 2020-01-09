@@ -62,7 +62,8 @@ public class InfixToPostfix {
   
   // Driver method
   public static void main(String[] args) {
-    String[] expressions = {"A+B*C-D*E", "((A+B)*C-D)*E", "a+b*(c^d-e)^(f+g*h)-i", "A*(B+C)"};
+    String[] expressions =
+        {"A+B*C-D*E", "((A+B)*C-D)*E", "a+b*(c^d-e)^(f+g*h)-i", "A*(B+C)", "(A+B)+(C-D)"};
     for (String expression : expressions) {
       System.out.println("Postfix for expression " + expression + " = "
           + new InfixToPostfix().infixToPostfix(expression));
