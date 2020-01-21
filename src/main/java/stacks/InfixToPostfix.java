@@ -25,15 +25,16 @@ public class InfixToPostfix {
         // pop the opening bracket '(' since we have evaluated the enclosed expression
         stack.pop();
       }
-      // If the scanned character is an ')', pop and output from the stack
+      // if the scanned character is an ')', pop and output from the stack
       // until an '(' is encountered.
       else {
-        while (!stack.isEmpty() && precedence(ch) <= precedence(stack.peek())) {
-          result.append(stack.pop());
-        }
         // stack will always have operators in increasing order of precedence therefore when an
         // operator of lower precedence comes we take out all the operators of higher precedence
         // from the stack and then push it
+        while (!stack.isEmpty() && precedence(ch) <= precedence(stack.peek())) {
+          result.append(stack.pop());
+        }
+        
         stack.push(ch);
       }
     }
