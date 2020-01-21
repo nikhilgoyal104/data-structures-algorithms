@@ -1,4 +1,4 @@
-package stacks.balancedSymbols;
+package stacks;
 
 import java.util.Stack;
 
@@ -20,7 +20,6 @@ public class BalancedSymbols {
     }
     return stack.isEmpty();
   }
-  
   
   private static boolean isBalanced2(String s) {
     Stack<Character> stack = new Stack<>();
