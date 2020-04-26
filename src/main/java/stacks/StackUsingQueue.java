@@ -21,7 +21,7 @@ class StackUsingQueue1 {
   // n dqs from q1 and n-1 enqs to q2, which gives 2n-1 operations, hence pop = O(n)
   public Integer pop() {
     // leave one element in q1 and push others to q2
-    while (queue1.size() > 1) {
+    while (queue1.size() != 1) {
       queue2.add(queue1.poll());
     }
     // fetch the one element left in q1

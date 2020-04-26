@@ -1,7 +1,5 @@
 package queues;
 
-import lombok.Data;
-
 import java.util.Stack;
 
 // two stacks push = O(n), pop = O(1)
