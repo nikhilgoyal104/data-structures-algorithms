@@ -4,7 +4,6 @@ package misc;
 public class NumberIsPalindrome2 {
   
   public static void main(String[] args) {
-    
     int num = 12321;
     boolean isPalindrome = true;
     while (num > 0) {
