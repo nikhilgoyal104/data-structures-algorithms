@@ -18,7 +18,7 @@ interface IQueue {
 
 
 @Data
-// add O(1) poll O(n)
+// time complexities => add = O(1), poll = O(n)
 class QueueUsingArray implements IQueue {
   private int[] nums;
   private int rear = -1, capacity;
@@ -80,10 +80,10 @@ class QueueUsingArray implements IQueue {
 
 
 @Data
-// add O(1) poll O(1)
+// time complexities => add = O(1), poll = O(1)
 class QueueUsingCircularArray implements IQueue {
   private int[] nums;
-  private int front = 0, rear = -1, size, capacity;
+  private int front, rear = -1, size, capacity;
   
   public QueueUsingCircularArray(int capacity) {
     this.capacity = capacity;

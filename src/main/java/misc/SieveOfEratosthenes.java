@@ -15,7 +15,7 @@ public class SieveOfEratosthenes {
     for (int i = 2; i <= n; i++) {
       // if i is not crossed out then cross out all multiples of i after i
       if (result.get(i)) {
-        for (int j = 2 * i; j <= n; j = j + i) {
+        for (int j = 2 * i; j <= n; j = j + i) { // first multiple of i = 2*i
           result.put(j, false);
         }
       }

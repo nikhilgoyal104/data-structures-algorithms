@@ -3,6 +3,8 @@ package stacks;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+import lombok.Data;
+
 interface IDynamicStack {
   
   void push(int data);
@@ -21,18 +23,13 @@ interface IDynamicStack {
 }
 
 
+@Data
+// time complexities => push = amortized O(1), pop = amortized O(1), peek = O(1)
 class DynamicStack implements IDynamicStack {
   
   private int[] nums;
   private int top = -1;
-  private int capacity;
-  private int size;
-  private static final int DEFAULT_CAPACITY = 5;
-  
-  DynamicStack() {
-    this.capacity = DEFAULT_CAPACITY;
-    this.nums = new int[DEFAULT_CAPACITY];
-  }
+  private int size, capacity;
   
   DynamicStack(int capacity) {
     this.capacity = capacity;
@@ -127,6 +124,11 @@ public class StackUsingDynamicArray {
     stack.push(6);
     stack.print();
     System.out.println(stack.pop());
+    stack.print();
+    stack.pop();
+    stack.pop();
+    stack.pop();
+    stack.pop();
     stack.print();
   }
 }

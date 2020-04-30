@@ -3,6 +3,7 @@ package stacks;
 import java.util.Arrays;
 import java.util.Stack;
 
+// next greater element for an element x is the first greater element on the right side of x
 public class NextGreaterElement {
   
   private static void calculateNgeUsingBruteForce(int[] input) {

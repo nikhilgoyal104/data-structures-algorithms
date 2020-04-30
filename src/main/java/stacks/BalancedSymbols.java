@@ -10,13 +10,13 @@ public class BalancedSymbols {
       char incomingCharacter = s.charAt(i);
       if (stack.isEmpty()) {
         stack.push(incomingCharacter);
-      } else {
-        if (isMatchingPair(stack.peek(), incomingCharacter)) {
-          stack.pop();
-        } else {
-          stack.push(incomingCharacter);
-        }
+        continue;
       }
+      if (isMatchingPair(stack.peek(), incomingCharacter)) {
+        stack.pop();
+        continue;
+      }
+      stack.push(incomingCharacter);
     }
     return stack.isEmpty();
   }
@@ -25,12 +25,12 @@ public class BalancedSymbols {
     Stack<Character> stack = new Stack<>();
     for (int i = 0; i < s.length(); i++) {
       char incomingCharacter = s.charAt(i);
-      // if stack is empty or the pair does not match
+      // if the stack is empty or the pair does not match
       if (stack.isEmpty() || !isMatchingPair(stack.peek(), incomingCharacter)) {
         stack.push(incomingCharacter);
-      } else {
-        stack.pop();
+        continue;
       }
+      stack.pop(); // stack.isEmpty() == true && isMatchingPair == true
     }
     return stack.isEmpty();
   }

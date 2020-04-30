@@ -19,19 +19,13 @@ interface IStack {
   int size();
 }
 
-
+// time complexities => push = O(1), pop = O(1), peek = O(1)
 class Stack implements IStack {
   
-  private int[] nums;
+  private final int[] nums;
   private int top = -1;
-  private int capacity;
   private int size;
-  private static final int DEFAULT_CAPACITY = 5;
-  
-  Stack() {
-    this.capacity = DEFAULT_CAPACITY;
-    this.nums = new int[DEFAULT_CAPACITY];
-  }
+  private final int capacity;
   
   Stack(int capacity) {
     this.capacity = capacity;

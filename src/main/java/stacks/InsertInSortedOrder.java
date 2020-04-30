@@ -5,6 +5,7 @@ import java.util.Stack;
 import lombok.Data;
 
 @Data
+// insert an element in sorted order in a sorted stack
 public class InsertInSortedOrder {
   
   // O(n) S(n)

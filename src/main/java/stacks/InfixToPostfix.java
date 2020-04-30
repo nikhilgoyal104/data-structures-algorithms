@@ -34,7 +34,6 @@ public class InfixToPostfix {
         while (!stack.isEmpty() && precedence(ch) <= precedence(stack.peek())) {
           result.append(stack.pop());
         }
-        
         stack.push(ch);
       }
     }

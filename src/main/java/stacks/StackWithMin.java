@@ -3,7 +3,6 @@ package stacks;
 import java.util.NoSuchElementException;
 
 interface IStack {
-  
   void push(int data);
   
   int pop();
@@ -20,29 +19,28 @@ interface IStack {
 }
 
 
-class Node1 {
-  
+class Node {
   int data;
-  Node1 next;
+  Node next;
   
-  Node1(int data) {
+  Node(int data) {
     this.data = data;
   }
 }
 
 
-// push = O(1) pop = O(n) ( when minimum element is popped ) getMin = O(1) space complexity = S(1)
+// time complexities => push = O(1), pop = O(n) (when minimum element is popped), getMin = O(1).
+// space complexity = S(1).
 class Stack1 implements IStack {
   
-  private Node1 top;
+  private Node top;
   private int size;
-  // this variable keeps track of the minimum value in the stack
-  private int min = Integer.MAX_VALUE;
+  private int min = Integer.MAX_VALUE; // this variable keeps track of the minimum value
   
-  // equivalent to insertAtBeginning in a linkedList
+  // equivalent to insertAtBeginning in a linked list
   @Override
   public void push(int data) {
-    Node1 node = new Node1(data);
+    Node node = new Node(data);
     node.next = top;
     top = node;
     if (data < min) {
@@ -52,7 +50,7 @@ class Stack1 implements IStack {
     size++;
   }
   
-  // equivalent to deleteFirst in a linkedList
+  // equivalent to deleteFirst in a linked list
   @Override
   public int pop() {
     if (isEmpty()) {
@@ -69,7 +67,7 @@ class Stack1 implements IStack {
     return data;
   }
   
-  // equivalent to getFirst in a linkedList
+  // equivalent to getFirst in a linked list
   @Override
   public int peek() {
     if (isEmpty()) {
@@ -90,7 +88,7 @@ class Stack1 implements IStack {
   
   @Override
   public void print() {
-    Node1 temp = top;
+    Node temp = top;
     while (temp != null) {
       System.out.print(temp.data + " ");
       temp = temp.next;
@@ -104,7 +102,7 @@ class Stack1 implements IStack {
   }
   
   private int calculateNewMin() {
-    Node1 temp = top;
+    Node temp = top;
     min = temp.data;
     while (temp != null) {
       if (temp.data < min) {
@@ -118,109 +116,26 @@ class Stack1 implements IStack {
 }
 
 
-class Node2 {
-  
-  int data;
-  // this variable keeps track of the minimum value at each node
-  int min;
-  Node2 next;
-  
-  Node2(int data) {
-    this.data = data;
-  }
-}
-
-
-// push = O(1) pop = O(1) getMin = O(1) space complexity = S(n)
+// time complexities => push = O(1), pop = O(1), getMin = O(1). space complexity = S(n).
 class Stack2 implements IStack {
   
-  private Node2 top;
+  private Node top;
   private int size;
+  final private java.util.Stack<Integer> minStack = new java.util.Stack<>();
   
-  // equivalent to insertAtBeginning in a linkedList
+  // equivalent to insertAtBeginning in a linked list
   @Override
   public void push(int data) {
-    Node2 node = new Node2(data);
-    if (isEmpty()) {
-      node.min = data;
-    } else {
-      node.min = Math.min(data, top.min);
+    Node node = new Node(data);
+    if (data < getMin()) {
+      minStack.push(Math.min(data, getMin()));
     }
     node.next = top;
     top = node;
     size++;
   }
   
-  // equivalent to deleteFirst in a linkedList
-  @Override
-  public int pop() {
-    if (isEmpty()) {
-      throw new NoSuchElementException("Stack is empty");
-    }
-    int data = top.data;
-    top = top.next;
-    size--;
-    return data;
-  }
-  
-  // equivalent to getFirst in a linkedList
-  @Override
-  public int peek() {
-    if (isEmpty()) {
-      throw new NoSuchElementException("Stack is empty");
-    }
-    return top.data;
-  }
-  
-  @Override
-  public int size() {
-    return size;
-  }
-  
-  @Override
-  public boolean isEmpty() {
-    return top == null;
-  }
-  
-  @Override
-  public void print() {
-    Node2 temp = top;
-    while (temp != null) {
-      System.out.print(temp.data + " ");
-      temp = temp.next;
-    }
-    System.out.println();
-  }
-  
-  @Override
-  public int getMin() {
-    return top.min;
-  }
-}
-
-
-// push = O(1) pop = O(1) getMin = O(1) space complexity = S(n)
-class Stack3 implements IStack {
-  
-  private Node1 top;
-  private int size;
-  private java.util.Stack<Integer> minStack = new java.util.Stack<>();
-  
-  // equivalent to insertAtBeginning in a linkedList
-  @Override
-  public void push(int data) {
-    Node1 node = new Node1(data);
-    if (isEmpty()) {
-      minStack.push(data);
-    } else if (data < minStack.peek()) {
-      minStack.push(data);
-    }
-    node.next = top;
-    top = node;
-    size++;
-  }
-  
-  // equivalent to deleteFirst in a linkedList
+  // equivalent to deleteFirst in a linked list
   @Override
   public int pop() {
     if (isEmpty()) {
@@ -257,7 +172,7 @@ class Stack3 implements IStack {
   
   @Override
   public void print() {
-    Node1 temp = top;
+    Node temp = top;
     while (temp != null) {
       System.out.print(temp.data + " ");
       temp = temp.next;
@@ -267,21 +182,101 @@ class Stack3 implements IStack {
   
   @Override
   public int getMin() {
+    if (isEmpty()) {
+      return Integer.MAX_VALUE;
+    }
     return minStack.peek();
   }
 }
 
 
-// here we use Stack class for Stack implementation
+class NodeWithMin {
+  int data;
+  int min; // this variable keeps track of the minimum value at each node
+  NodeWithMin next;
+  
+  NodeWithMin(int data, int min) {
+    this.data = data;
+    this.min = min;
+  }
+}
+
+
+// time complexities => push = O(1), pop = O(1), getMin = O(1). space complexity = S(1).
+class Stack3 implements IStack {
+  
+  private NodeWithMin top;
+  private int size;
+  
+  // equivalent to insertAtBeginning in a linked list
+  @Override
+  public void push(int data) {
+    int newMin = Math.min(data, getMin());
+    NodeWithMin node = new NodeWithMin(data, newMin);
+    node.next = top;
+    top = node;
+    size++;
+  }
+  
+  // equivalent to deleteFirst in a linked list
+  @Override
+  public int pop() {
+    if (isEmpty()) {
+      throw new NoSuchElementException("Stack is empty");
+    }
+    int data = top.data;
+    top = top.next;
+    size--;
+    return data;
+  }
+  
+  // equivalent to getFirst in a linked list
+  @Override
+  public int peek() {
+    if (isEmpty()) {
+      throw new NoSuchElementException("Stack is empty");
+    }
+    return top.data;
+  }
+  
+  @Override
+  public int size() {
+    return size;
+  }
+  
+  @Override
+  public boolean isEmpty() {
+    return top == null;
+  }
+  
+  @Override
+  public void print() {
+    NodeWithMin temp = top;
+    while (temp != null) {
+      System.out.print(temp.data + " ");
+      temp = temp.next;
+    }
+    System.out.println();
+  }
+  
+  @Override
+  public int getMin() {
+    if (isEmpty()) {
+      return Integer.MAX_VALUE;
+    }
+    return top.min;
+  }
+}
+
+
+// time complexities => push = O(1), pop = O(1), getMin = O(1). space complexity = S(1).
 class Stack4 extends java.util.Stack<Integer> {
   
-  private java.util.Stack<Integer> minStack = new java.util.Stack<>();
+  private final java.util.Stack<Integer> minStack = new java.util.Stack<>();
   
-  void push(int data) {
-    if (isEmpty()) {
-      minStack.push(data);
-    } else if (data < minStack.peek()) {
-      minStack.push(data);
+  public void push(int data) {
+    if (data < getMin()) {
+      minStack.push(Math.min(data, getMin()));
     }
     super.push(data);
   }
@@ -294,40 +289,41 @@ class Stack4 extends java.util.Stack<Integer> {
     return data;
   }
   
-  Integer getMin() {
+  public Integer getMin() {
+    if (minStack.isEmpty()) {
+      return Integer.MAX_VALUE;
+    }
     return minStack.peek();
   }
 }
 
 
-class Object {
-  int data;
-  int min;
+class StackItem {
+  int data, min;
   
-  Object(int data) {
+  StackItem(int data, int min) {
     this.data = data;
+    this.min = min;
   }
 }
 
 
-// here we use Stack class for Stack implementation
-class Stack5 extends java.util.Stack<Object> {
+// time complexities => push = O(1), pop = O(1), getMin = O(1). space complexity = S(1).
+class Stack5 extends java.util.Stack<StackItem> {
   
-  void push(int data) {
-    Object object = new Object(data);
-    if (isEmpty()) {
-      object.min = data;
-    } else {
-      object.min = Math.min(data, peek().min);
-    }
-    super.push(object);
+  public void push(int data) {
+    int newMin = Math.min(data, getMin());
+    super.push(new StackItem(data, newMin));
   }
   
-  public Object pop() {
+  public StackItem pop() {
     return super.pop();
   }
   
-  Integer getMin() {
+  public Integer getMin() {
+    if (this.isEmpty()) {
+      return Integer.MAX_VALUE;
+    }
     return super.peek().min;
   }
 }

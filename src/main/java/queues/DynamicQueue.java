@@ -1,5 +1,7 @@
 package queues;
 
+import java.util.Arrays;
+
 import lombok.Data;
 
 
@@ -17,7 +19,7 @@ interface IDynamicQueue {
 
 
 @Data
-// add amortized O(1) poll O(n)
+// time complexities => add = amortized O(1), poll = O(n)
 class DynamicQueueUsingArray implements IDynamicQueue {
   private int[] nums;
   private int rear = -1;
@@ -36,21 +38,8 @@ class DynamicQueueUsingArray implements IDynamicQueue {
   }
   
   private void increaseCapacity() {
-    // create new array with double capacity
-    createNewArray(capacity * 2);
-  }
-  
-  private void createNewArray(int capacity) {
-    // set the new capacity
-    this.capacity = capacity;
-    // create a temp array
-    int[] temp = new int[capacity];
-    // copy elements from nums to temp array
-    for (int i = 0; i < rear + 1; i++) {
-      temp[i] = nums[i];
-    }
-    // point nums to temp array
-    nums = temp;
+    capacity *= 2;
+    nums = Arrays.copyOf(nums, capacity);
   }
   
   public Integer poll() {
@@ -97,7 +86,7 @@ class DynamicQueueUsingArray implements IDynamicQueue {
 
 
 @Data
-// add amortized O(1) poll O(1)
+// time complexities => add = amortized O(1), poll = O(1)
 class DynamicQueueUsingCircularArray implements IDynamicQueue {
   private int[] nums;
   private int front, rear = -1, size, capacity;
@@ -117,35 +106,34 @@ class DynamicQueueUsingCircularArray implements IDynamicQueue {
   }
   
   private void increaseCapacity() {
-    // create new array with double capacity
-    createNewArray(capacity * 2);
-  }
-  
-  private void createNewArray(int capacity) {
-    // set the new capacity
-    this.capacity = capacity;
-    // create a temp array
-    int[] temp = new int[capacity];
-    // copy elements from nums to temp array
-    for (int i = 0; i < rear + 1; i++) {
-      temp[i] = nums[i];
-    }
-    // point nums to temp array
-    nums = temp;
+    capacity *= 2;
+    nums = Arrays.copyOf(nums, capacity);
   }
   
   public Integer poll() {
     if (isEmpty()) {
+      // reset front and rear to initial state
+      front = 0;
+      rear = -1;
       System.out.println("Can't poll an element from queue, as it is already empty.");
       return null;
     }
     int data = nums[front];
     front = (front + 1) % capacity;
+    size--;
     return data;
   }
   
   public boolean isEmpty() {
     return size == 0;
+  }
+  
+  public int size() {
+    return size;
+  }
+  
+  private boolean isFull() {
+    return size == capacity;
   }
   
   public void display() {
@@ -157,14 +145,6 @@ class DynamicQueueUsingCircularArray implements IDynamicQueue {
       System.out.print(nums[i] + " ");
     }
     System.out.println();
-  }
-  
-  public int size() {
-    return size;
-  }
-  
-  private boolean isFull() {
-    return size == capacity;
   }
 }
 

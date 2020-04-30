@@ -28,7 +28,7 @@ class Node {
   }
 }
 
-
+// time complexities => push = O(1), pop = O(1)
 class Stack implements IStack {
   
   private Node top;
