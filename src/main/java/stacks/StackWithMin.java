@@ -126,10 +126,10 @@ class Stack2 implements IStack {
   // equivalent to insertAtBeginning in a linked list
   @Override
   public void push(int data) {
-    Node node = new Node(data);
     if (data < getMin()) {
-      minStack.push(Math.min(data, getMin()));
+      minStack.push(data);
     }
+    Node node = new Node(data);
     node.next = top;
     top = node;
     size++;
@@ -276,7 +276,7 @@ class Stack4 extends java.util.Stack<Integer> {
   
   public void push(int data) {
     if (data < getMin()) {
-      minStack.push(Math.min(data, getMin()));
+      minStack.push(data);
     }
     super.push(data);
   }

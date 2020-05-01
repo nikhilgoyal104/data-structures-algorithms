@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 class Node {
   int data;
-  int priority; // lower value indicate higher priority
+  int priority; // lower value indicates higher priority
   Node next;
 }
 
